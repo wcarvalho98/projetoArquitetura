@@ -43,8 +43,6 @@ backgroud_loop:
 #	Pintando o player e povoando o vetor jogador com o seu lugar na mem�ria	#
 #################################################################################
 player:
-	lw	$t0, bitmap_address
-	lw	$t1, jogador_cor
 	li	$t2, 0x10011B7C
 	sw	$t2, jogador
 	li	$t2, 0x10011C78
@@ -53,12 +51,14 @@ player:
 	sw	$t2, jogador + 8
 	li	$t2, 0x10011C80
 	sw	$t2, jogador + 12
+pinta_player:
+	lw	$t1, jogador_cor
 	move	$t2, $zero
-player_p:
+player_loop:
 	lw	$t3, jogador($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
-	blt	$t2, 16, player_p
+	blt	$t2, 16, player_loop
 	jr	$ra
 	
 #################################################################################
