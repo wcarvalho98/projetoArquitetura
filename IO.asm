@@ -21,8 +21,21 @@ corVerde: 	.word 0x0000FF00
 main:
 	jal 	background
 	jal	player
-	j 	exit
 	
+main_loop:
+	li	$v0, 0x00000000
+	jal	obter_tecla
+	beq	$v0, 0x01000000, main_direita
+	beq	$v0, 0x02000000, main_esquerda
+	j	main_loop
+	
+main_direita:
+	jal	mover_direita
+	j	main_loop
+	
+main_esquerda:
+	jal	mover_esquerda
+	j	main_loop
 #################################################################################
 #	Pintando o background							#
 #################################################################################
@@ -99,7 +112,7 @@ direita_fim:
 mover_esquerda:
 	move	$t7, $ra
 	lw	$t4, jogador + 4
-	beq	$t4, 0x10011D00, equerda_fim
+	beq	$t4, 0x10011D00, esquerda_fim
 	jal 	limpa_jogador
 	move	$t2, $zero
 esquerda_loop:
@@ -130,6 +143,8 @@ obter_tecla_disparo:
 	bne $t0 32 obter_tecla_voltar
 	li $v0 0x03000000		
 obter_tecla_voltar:
+	li $t0, 0xFFFF0004
+	sw $zero, ($t0)
 	jr $ra
 	
 #################################################################################
