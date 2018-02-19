@@ -40,7 +40,7 @@ backgroud_loop:
 	jr	$ra
 	
 #################################################################################
-#	Pintando o player e povoando o vetor jogador com o seu lugar na mem�ria	#
+#	Pintando o player e povoando o vetor jogador com o seu lugar na memoria #
 #################################################################################
 player:
 	li	$t2, 0x10011B7C
@@ -62,9 +62,26 @@ player_loop:
 	jr	$ra
 	
 #################################################################################
+#	Limpa o jogador antes de pintar						#
+#################################################################################
+limpa_jogador:
+	move 	$t2, $zero
+	lw	$t1, cor
+limpa_loop:
+	lw	$t3, jogador($t2)
+	sw	$t1, ($t3)
+	addi	$t2, $t2, 4
+	blt	$t2, 16, limpa_loop
+	jr	$ra
+	
+#################################################################################
 #	Movendo o jogador para a direita					#
 #################################################################################
 mover_direita:
+	move	$t7, $ra
+	lw	$t4, jogador + 12
+	beq	$t4, 0x10011DFC, direita_fim
+	jal 	limpa_jogador
 	move	$t2, $zero
 direita_loop:
 	lw	$t3, jogador($t2)
@@ -72,12 +89,18 @@ direita_loop:
 	sw	$t3, jogador($t2)
 	addi	$t2, $t2, 4
 	blt	$t2, 16, direita_loop
-	jr	$ra
+	jal	pinta_player
+direita_fim:
+	jr	$t7
 	
 #################################################################################
 #	Movendo o jogador para a esquerda					#
 #################################################################################
 mover_esquerda:
+	move	$t7, $ra
+	lw	$t4, jogador + 4
+	beq	$t4, 0x10011D00, equerda_fim
+	jal 	limpa_jogador
 	move	$t2, $zero
 esquerda_loop:
 	lw	$t3, jogador($t2)
@@ -85,7 +108,9 @@ esquerda_loop:
 	sw	$t3, jogador($t2)
 	addi	$t2, $t2, 4
 	blt	$t2, 16, esquerda_loop
-	jr	$ra
+	jal	pinta_player
+esquerda_fim:
+	jr	$t7
 	
 #################################################################################
 #	Retorna $v0 com o valor 0x01, 0x02 ou 0x03, indicando			#
