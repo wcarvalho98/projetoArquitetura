@@ -5,7 +5,7 @@
 #			4- Tools -> Keyboard and Display
 #			5- Connect to MIPS
 #			6- Assemble and RUN
-
+#testeCommit
 .kdata
 
 cor:		.word 0x000000FF
