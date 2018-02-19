@@ -20,6 +20,7 @@ jogador_size:	.word 1			# 8 x 8 pixels
 main:
 	jal 	background
 	jal	player
+	jal 	nave
 	j 	exit
 	
 background:
@@ -38,6 +39,7 @@ backgroud_loop:
 player:
 	lw	$t0, bitmap_address
 	lw	$t1, jogador_cor
-	
-	
 exit:
+
+nave:
+	
