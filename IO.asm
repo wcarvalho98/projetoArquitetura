@@ -1,3 +1,11 @@
+# Como iniciar: 	0- Open MARS
+#			1- Tools -> Bitmap Display
+#			2- unit width in pixel: 8 / unit height in pixel: 8
+#			3- Display Width in Pixels: 512 / Display Height in Pixels: 256
+#			4- Tools -> Keyboard and Display
+#			5- Connect to MIPS
+#			6- Assemble and RUN
+
 .kdata
 
 cor:		.word 0x000000FF
@@ -28,16 +36,8 @@ backgroud_loop:
 	jr	$ra
 	
 player:
-	lw	$t0, jogador_pos
+	lw	$t0, bitmap_address
 	lw	$t1, jogador_cor
-	lw	$t2, jogador_size
-	move	$t3, $zero
-player_loop:
-	sll	$t4, $t3, 2
-	add	$t4, $t4, $t0
-	sw	$t1, 0($t4)
-	addi	$t3, $t3, 1
-	blt	$t3, $t2, player_loop
-	jr	$ra
+	
 	
 exit:
