@@ -12,14 +12,13 @@ cor:		.word 0x0000CCFF
 bitmap_address:	.word 0x10010000
 bitmap_size:	.word 2048		# (512 x 256)/8 pixels
 jogador_cor:	.word 0x00FF0000
-jogador_pos:	.word 0x10011B7C
+jogador:	.space 16		# 4x4 blocos
 
 .text
 .globl main
 main:
 	jal 	background
 	jal	player
-	jal 	nave
 	j 	exit
 	
 background:
@@ -38,19 +37,20 @@ backgroud_loop:
 player:
 	lw	$t0, bitmap_address
 	lw	$t1, jogador_cor
-	lw	$t2, jogador_pos
-	sw	$t1, ($t2)
-	sw	$t1, 7288($t0)
-	sw	$t1, 7292($t0)
-	sw	$t1, 7296($t0)
-	sw	$t1, 7540($t0)
-	sw	$t1, 7544($t0)
-	sw	$t1, 7548($t0)
-	sw	$t1, 7552($t0)
-	sw	$t1, 7556($t0)
+	li	$t2, 0x10011B7C
+	sw	$t2, jogador
+	li	$t2, 0x10011C78
+	sw	$t2, jogador + 4 
+	li	$t2, 0x10011C7C
+	sw	$t2, jogador + 8
+	li	$t2, 0x10011C80
+	sw	$t2, jogador + 12
+	move	$t2, $zero
+player_p:
+	lw	$t3, jogador($t2)
+	sw	$t1, ($t3)
+	addi	$t2, $t2, 4
+	blt	$t2, 16, player_p
 	jr	$ra
 	
 exit:
-
-nave:
-	
