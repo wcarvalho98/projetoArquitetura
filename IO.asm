@@ -1,25 +1,25 @@
-# Como iniciar: 0- Open MARS
-#		1- Tools -> Bitmap Display
-#		2- unit width in pixel: 8 / unit height in pixel: 8
-#		3- Display Width in Pixels: 512 / Display Height in Pixels: 256
-#		4- Tools -> Keyboard and Display
-#		5- Connect to MIPS
-#		6- Assemble and RUN
-
+# Como iniciar: 	0- Open MARS
+#			1- Tools -> Bitmap Display
+#			2- unit width in pixel: 8 / unit height in pixel: 8
+#			3- Display Width in Pixels: 512 / Display Height in Pixels: 256
+#			4- Tools -> Keyboard and Display
+#			5- Connect to MIPS
+#			6- Assemble and RUN
+#testeCommit
 .kdata
 
-cor:		.word 0x0000CCFF
+cor:		.word 0x000000FF
 bitmap_address:	.word 0x10010000
 bitmap_size:	.word 2048		# (512 x 256)/8 pixels
-jogador_cor:	.word 0x00FF0000
-jogador_pos:	.word 0x10011B7C
+jogador_cor:	.word 0x00000000
+jogador_pos:	.word 0x10011A7C
+jogador_size:	.word 1			# 8 x 8 pixels
 
 .text
 .globl main
 main:
 	jal 	background
 	jal	player
-	jal 	nave
 	j 	exit
 	
 background:
@@ -38,19 +38,6 @@ backgroud_loop:
 player:
 	lw	$t0, bitmap_address
 	lw	$t1, jogador_cor
-	lw	$t2, jogador_pos
-	sw	$t1, ($t2)
-	sw	$t1, 7288($t0)
-	sw	$t1, 7292($t0)
-	sw	$t1, 7296($t0)
-	sw	$t1, 7540($t0)
-	sw	$t1, 7544($t0)
-	sw	$t1, 7548($t0)
-	sw	$t1, 7552($t0)
-	sw	$t1, 7556($t0)
-	jr	$ra
+	
 	
 exit:
-
-nave:
-	
