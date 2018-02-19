@@ -16,26 +16,32 @@ jogador_cor:	.word 0x00FF0000
 jogador:	.space 16		# 4x4 blocos
 corVerde: 	.word 0x0000FF00
 
+#################################################################################
+#	MAIN	--	Space Invaders						#
+#################################################################################
+
 .text
 .globl main
 main:
 	jal 	background
 	jal	player
+	jal	nave
 	
 main_loop:
+	jal	sleep
 	li	$v0, 0x00000000
 	jal	obter_tecla
-	beq	$v0, 0x01000000, main_direita
-	beq	$v0, 0x02000000, main_esquerda
-	j	main_loop
 	
 main_direita:
+	bne	$v0, 0x01000000, main_esquerda
 	jal	mover_direita
 	j	main_loop
 	
 main_esquerda:
+	bne	$v0, 0x02000000, main_loop
 	jal	mover_esquerda
 	j	main_loop
+	
 #################################################################################
 #	Pintando o background							#
 #################################################################################
@@ -244,3 +250,10 @@ nave:
 	sw $t1, 1256 ($t0)
 	sw $t1, 1516 ($t0)
 	
+	jr	$ra
+	
+sleep:
+	li $v0 32 		# Syscall 32. Usa el Sleep de Java
+	li $a0 60
+	syscall
+	jr	$ra
