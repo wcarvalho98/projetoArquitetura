@@ -42,8 +42,8 @@ destruida_7:	.byte  0
 main:
 	jal 	background
 	jal	player
-	jal	nave_nivel_3
-	jal	pinta_naves_3
+	jal	naves
+	jal	pinta_naves_1
 	
 main_loop:
 	jal	sleep
@@ -503,7 +503,7 @@ exit:
 #################################################################################
 #	Naves do est�gio 3							#
 #################################################################################
-nave_nivel_3:	
+naves:	
 	# Nave 1 (nave mae)
 	li	$t2, 0x1001017C
 	sw	$t2, nave_1
@@ -559,93 +559,93 @@ nave_nivel_3:
 	sw	$t2, nave_1 + 100
 	
 	# Nave 2
-	li	$t2, 0x10010F18
+	li	$t2, 0x10010B58
 	sw	$t2, nave_2
-	li	$t2, 0x10011014
+	li	$t2, 0x10010C54
 	sw	$t2, nave_2 + 4
-	li	$t2, 0x10011018
+	li	$t2, 0x10010C58
 	sw	$t2, nave_2 + 8
-	li	$t2, 0x1001101C
+	li	$t2, 0x10010C5C
 	sw	$t2, nave_2 + 12
-	li	$t2, 0x10011114
+	li	$t2, 0x10010D54
 	sw	$t2, nave_2 + 16
-	li	$t2, 0x1001111C
+	li	$t2, 0x10010D5C
 	sw	$t2, nave_2 + 20
-	li	$t2, 0x10011210
+	li	$t2, 0x10010E50
 	sw	$t2, nave_2 + 24
-	li	$t2, 0x10011220
+	li	$t2, 0x10010E60
 	sw	$t2, nave_2 + 28
 	
 	# Nave 3
-	li	$t2, 0x10010638
+	li	$t2, 0x100104A4
 	sw	$t2, nave_3
-	li	$t2, 0x10010734
+	li	$t2, 0x100105A0
 	sw	$t2, nave_3 + 4
-	li	$t2, 0x10010738
+	li	$t2, 0x100105A4
 	sw	$t2, nave_3 + 8
-	li	$t2, 0x1001073C
+	li	$t2, 0x100105A8
 	sw	$t2, nave_3 + 12
-	li	$t2, 0x10010834
+	li	$t2, 0x100106A0
 	sw	$t2, nave_3 + 16
-	li	$t2, 0x1001083C
+	li	$t2, 0x100106A8
 	sw	$t2, nave_3 + 20
-	li	$t2, 0x10010930
+	li	$t2, 0x1001079C
 	sw	$t2, nave_3 + 24
-	li	$t2, 0x10010940
+	li	$t2, 0x100107AC
 	sw	$t2, nave_3 + 28
 	
 	# Nave 4
-	li	$t2, 0x10010B58
+	li	$t2, 0x10010638
 	sw	$t2, nave_4
-	li	$t2, 0x10010C54
+	li	$t2, 0x10010734
 	sw	$t2, nave_4 + 4
-	li	$t2, 0x10010C58
+	li	$t2, 0x10010738
 	sw	$t2, nave_4 + 8
-	li	$t2, 0x10010C5C
+	li	$t2, 0x1001073C
 	sw	$t2, nave_4 + 12
-	li	$t2, 0x10010D54
+	li	$t2, 0x10010834
 	sw	$t2, nave_4 + 16
-	li	$t2, 0x10010D5C
+	li	$t2, 0x1001083C
 	sw	$t2, nave_4 + 20
-	li	$t2, 0x10010E50
+	li	$t2, 0x10010930
 	sw	$t2, nave_4 + 24
-	li	$t2, 0x10010E60
+	li	$t2, 0x10010940
 	sw	$t2, nave_4 + 28
 	
 	# Nave 5
-	li	$t2, 0x100104A4
-	sw	$t2, nave_5
-	li	$t2, 0x100105A0
-	sw	$t2, nave_5 + 4
-	li	$t2, 0x100105A4
-	sw	$t2, nave_5 + 8
-	li	$t2, 0x100105A8
-	sw	$t2, nave_5 + 12
-	li	$t2, 0x100106A0
-	sw	$t2, nave_5 + 16
-	li	$t2, 0x100106A8
-	sw	$t2, nave_5 + 20
-	li	$t2, 0x1001079C
-	sw	$t2, nave_5 + 24
-	li	$t2, 0x100107AC
-	sw	$t2, nave_5 + 28
-	
-	# Nave 6
 	li	$t2, 0x10010AC4
-	sw	$t2, nave_6
+	sw	$t2, nave_5
 	li	$t2, 0x10010BC0
-	sw	$t2, nave_6 + 4
+	sw	$t2, nave_5 + 4
 	li	$t2, 0x10010BC4
-	sw	$t2, nave_6 + 8
+	sw	$t2, nave_5 + 8
 	li	$t2, 0x10010BC8
-	sw	$t2, nave_6 + 12
+	sw	$t2, nave_5 + 12
 	li	$t2, 0x10010CC0
-	sw	$t2, nave_6 + 16
+	sw	$t2, nave_5 + 16
 	li	$t2, 0x10010CC8
-	sw	$t2, nave_6 + 20
+	sw	$t2, nave_5 + 20
 	li	$t2, 0x10010DBC
-	sw	$t2, nave_6 + 24
+	sw	$t2, nave_5 + 24
 	li	$t2, 0x10010DCC
+	sw	$t2, nave_5 + 28
+		
+	# Nave 6
+	li	$t2, 0x10010F18
+	sw	$t2, nave_6
+	li	$t2, 0x10011014
+	sw	$t2, nave_6 + 4
+	li	$t2, 0x10011018
+	sw	$t2, nave_6 + 8
+	li	$t2, 0x1001101C
+	sw	$t2, nave_6 + 12
+	li	$t2, 0x10011114
+	sw	$t2, nave_6 + 16
+	li	$t2, 0x1001111C
+	sw	$t2, nave_6 + 20
+	li	$t2, 0x10011210
+	sw	$t2, nave_6 + 24
+	li	$t2, 0x10011220
 	sw	$t2, nave_6 + 28
 	
 	# Nave 7
@@ -667,18 +667,44 @@ nave_nivel_3:
 	sw	$t2, nave_7 + 28
 				
 	jr	$ra
+
+#################################################################################
+#	Pinta naves 1-3								#
+#################################################################################
+pinta_naves_1:
+	lw	$t1, corVerde
+	move	$t2, $zero
+naves_1_loop:
+	lw	$t3, nave_1($t2)
+	sw	$t1, ($t3)
+	addi	$t2, $t2, 4
+	blt	$t2, 168, naves_1_loop
+	jr	$ra
 	
+#################################################################################
+#	Pinta naves 1-5								#
+#################################################################################
+pinta_naves_2:
+	lw	$t1, corVerde
+	move	$t2, $zero
+naves_2_loop:
+	lw	$t3, nave_1($t2)
+	sw	$t1, ($t3)
+	addi	$t2, $t2, 4
+	blt	$t2, 232, naves_2_loop
+	jr	$ra	
+
 #################################################################################
 #	Pinta naves 1-7								#
 #################################################################################
 pinta_naves_3:
 	lw	$t1, corVerde
 	move	$t2, $zero
-naves_loop:
+naves_3_loop:
 	lw	$t3, nave_1($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
-	blt	$t2, 296, naves_loop
+	blt	$t2, 296, naves_3_loop
 	jr	$ra
 	
 #################################################################################
