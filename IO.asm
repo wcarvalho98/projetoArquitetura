@@ -24,6 +24,8 @@ nave_5:		.space 32
 nave_6:		.space 32
 nave_7:		.space 32
 barra_nivel_1: 	.space 80
+barra_nivel2_1: .space 60
+barra_nivel2_2: .space 60 
 
 #################################################################################
 #	MAIN	--	Space Invaders						#
