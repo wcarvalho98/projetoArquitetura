@@ -23,6 +23,7 @@ nave_4:		.space 32
 nave_5:		.space 32
 nave_6:		.space 32
 nave_7:		.space 32
+barra_nivel_1: 	.space 80
 
 #################################################################################
 #	MAIN	--	Space Invaders						#
@@ -128,7 +129,7 @@ mover_disparo:
 	jr	$ra
 	
 #################################################################################
-#	Pìnta o disparo na tela							#
+#	Pï¿½nta o disparo na tela							#
 #################################################################################
 pinta_disparo:
 	lw	$t1, jogador_cor
@@ -147,7 +148,7 @@ limpa_disparo:
 	
 #################################################################################
 #	Verifica se o disparo acabou						#
-#	Retorna: $a0 = 1 se ainda está disparando				#
+#	Retorna: $a0 = 1 se ainda estï¿½ disparando				#
 #		 $a0 = 0 caso o disparo tenha terminado				#
 #################################################################################
 verifica_disparo:
@@ -221,7 +222,7 @@ obter_tecla_voltar:
 exit:
 
 #################################################################################
-#	Naves do estágio 3							#
+#	Naves do estï¿½gio 3							#
 #################################################################################
 nave_nivel_3:	
 	# Nave 1 (nave mae)
@@ -386,6 +387,56 @@ nave_nivel_3:
 	li	$t2, 0x100105EC
 	sw	$t2, nave_7 + 28
 	
+	#BarraNivel1
+	li	$t2, 0x10011158
+	sw	$t2, barra_nivel_1
+	li	$t2, 0x1001115C
+	sw	$t2, barra_nivel_1 + 4
+	li	$t2, 0x10011160
+	sw	$t2, barra_nivel_1 + 8
+	li	$t2, 0x10011164
+	sw	$t2, barra_nivel_1 + 12
+	li	$t2, 0x10011168
+	sw	$t2, barra_nivel_1 + 16
+	li	$t2, 0x1001116C
+	sw	$t2, barra_nivel_1 + 20
+	li	$t2, 0x10011170
+	sw	$t2, barra_nivel_1 + 24
+	li	$t2, 0x10011174
+	sw	$t2, barra_nivel_1 + 28
+	li	$t2, 0x10011178
+	sw	$t2, barra_nivel_1 + 32
+	li	$t2, 0x1001117C
+	sw	$t2, barra_nivel_1 + 36
+	li	$t2, 0x10011180
+	sw	$t2, barra_nivel_1 + 40
+	li	$t2, 0x10011184
+	sw	$t2, barra_nivel_1 + 44
+	li	$t2, 0x10011188
+	sw	$t2, barra_nivel_1 + 48
+	li	$t2, 0x1001118C
+	sw	$t2, barra_nivel_1 + 52
+	li	$t2, 0x10011190
+	sw	$t2, barra_nivel_1 + 56
+	li	$t2, 0x10011194
+	sw	$t2, barra_nivel_1 + 60
+	li	$t2, 0x10011198
+	sw	$t2, barra_nivel_1 + 64
+	li	$t2, 0x1001119C
+	sw	$t2, barra_nivel_1 + 68
+	li	$t2, 0x100111A0
+	sw	$t2, barra_nivel_1 + 72
+	li	$t2, 0x100111A4
+	sw	$t2, barra_nivel_1 + 76
+pinta_barra:
+	lw	$t1, corVerde
+	move	$t2, $zero
+barra_loop:
+	lw	$t3, barra_nivel_1($t2)
+	sw	$t1, ($t3)
+	addi	$t2, $t2, 4
+	blt	$t2, 80, barra_loop
+				
 	jr	$ra
 
 #################################################################################
@@ -415,7 +466,7 @@ naves_loop:
 	jr	$ra
 	
 #################################################################################
-#	Função para dormir por 60ms						#
+#	Funï¿½ï¿½o para dormir por 60ms						#
 #################################################################################
 sleep:
 	li $v0 32 		# Syscall 32. Usa el Sleep de Java
