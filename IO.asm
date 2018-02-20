@@ -43,8 +43,7 @@ main:
 	jal 	background
 	jal	player
 	jal	nave_nivel_3
-	jal	pinta_nave_1
-	jal	pinta_naves
+	jal	pinta_naves_3
 	
 main_loop:
 	jal	sleep
@@ -668,31 +667,18 @@ nave_nivel_3:
 	sw	$t2, nave_7 + 28
 				
 	jr	$ra
-
-#################################################################################
-#	Pinta nave 1								#
-#################################################################################
-pinta_nave_1:
-	lw	$t1, corVerde
-	move	$t2, $zero
-nave_1_loop:
-	lw	$t3, nave_1($t2)
-	sw	$t1, ($t3)
-	addi	$t2, $t2, 4
-	blt	$t2, 104, nave_1_loop
-	jr	$ra
 	
 #################################################################################
-#	Pinta naves 2-7								#
+#	Pinta naves 1-7								#
 #################################################################################
-pinta_naves:
+pinta_naves_3:
 	lw	$t1, corVerde
 	move	$t2, $zero
 naves_loop:
-	lw	$t3, nave_2($t2)
+	lw	$t3, nave_1($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
-	blt	$t2, 192, naves_loop
+	blt	$t2, 296, naves_loop
 	jr	$ra
 	
 #################################################################################
