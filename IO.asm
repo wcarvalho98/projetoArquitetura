@@ -15,6 +15,7 @@ bitmap_size:	.word 2048		# (512 x 256)/8 pixels
 jogador_cor:	.word 0x00FF0000
 jogador:	.space 16		# 4x4 blocos
 corVerde: 	.word 0x0000FF00
+disparo:	.word 0x00000000
 
 #################################################################################
 #	MAIN	--	Space Invaders						#
@@ -31,6 +32,11 @@ main_loop:
 	jal	sleep
 	li	$v0, 0x00000000
 	jal	obter_tecla
+	jal	verifica_disparo
+	bne	$a0, 1, main_direita
+	jal	limpa_disparo
+	jal	mover_disparo
+	jal	pinta_disparo
 	
 main_direita:
 	bne	$v0, 0x01000000, main_esquerda
@@ -38,8 +44,15 @@ main_direita:
 	j	main_loop
 	
 main_esquerda:
-	bne	$v0, 0x02000000, main_loop
+	bne	$v0, 0x02000000, main_disparo
 	jal	mover_esquerda
+	j	main_loop
+	
+main_disparo:
+	bne	$v0, 0x03000000, main_loop
+	jal	verifica_disparo
+	beq 	$a0, 1, main_loop
+	jal	disparar
 	j	main_loop
 	
 #################################################################################
@@ -92,6 +105,46 @@ limpa_loop:
 	addi	$t2, $t2, 4
 	blt	$t2, 16, limpa_loop
 	jr	$ra
+		
+#################################################################################
+#	Disparar								#
+#################################################################################
+disparar:
+	lw	$t0, jogador
+	sw	$t0, disparo
+mover_disparo:
+	lw	$t0, disparo
+	addi	$t0, $t0, -256
+	sw	$t0, disparo
+	jr	$ra
+	
+#################################################################################
+#	Pìnta o disparo na tela							#
+#################################################################################
+pinta_disparo:
+	lw	$t1, jogador_cor
+	lw	$t2, disparo
+	sw	$t1, ($t2)
+	jr	$ra
+
+#################################################################################
+#	Limpa o disparo do jogador						#
+#################################################################################
+limpa_disparo:
+	lw	$t1, cor
+	lw	$t2, disparo
+	sw	$t1, ($t2)
+	jr	$ra
+	
+#################################################################################
+#	Verifica se o disparo acabou						#
+#	Retorna: $a0 = 1 se ainda está disparando				#
+#		 $a0 = 0 caso o disparo tenha terminado				#
+#################################################################################
+verifica_disparo:
+	lw	$t0, disparo
+	sge	$a0, $t0, 0x10010000
+	jr	$ra
 	
 #################################################################################
 #	Movendo o jogador para a direita					#
@@ -99,7 +152,7 @@ limpa_loop:
 mover_direita:
 	move	$t7, $ra
 	lw	$t4, jogador + 12
-	beq	$t4, 0x10011DFC, direita_fim
+	beq	$t4, 0x10011CFC, direita_fim
 	jal 	limpa_jogador
 	move	$t2, $zero
 direita_loop:
@@ -118,7 +171,7 @@ direita_fim:
 mover_esquerda:
 	move	$t7, $ra
 	lw	$t4, jogador + 4
-	beq	$t4, 0x10011D00, esquerda_fim
+	beq	$t4, 0x10011C00, esquerda_fim
 	jal 	limpa_jogador
 	move	$t2, $zero
 esquerda_loop:
@@ -130,7 +183,7 @@ esquerda_loop:
 	jal	pinta_player
 esquerda_fim:
 	jr	$t7
-	
+
 #################################################################################
 #	Retorna $v0 com o valor 0x01, 0x02 ou 0x03, indicando			#
 #	direita, esquerda e disparo respectivamente.				#
