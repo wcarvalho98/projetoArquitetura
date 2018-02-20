@@ -32,6 +32,8 @@ destruida_5:	.byte  0
 destruida_6:	.byte  0
 destruida_7:	.byte  0
 .align 1
+barra_nivel2_1: .space 60
+barra_nivel2_2: .space 60 
 
 #################################################################################
 #	MAIN	--	Space Invaders						#
