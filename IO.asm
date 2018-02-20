@@ -23,6 +23,7 @@ nave_4:		.space 32
 nave_5:		.space 32
 nave_6:		.space 32
 nave_7:		.space 32
+barra_nivel_1: 	.space 80
 destruida_1:	.byte  0
 destruida_2:	.byte  0
 destruida_3:	.byte  0
@@ -146,7 +147,7 @@ mover_disparo:
 	jr	$ra
 	
 #################################################################################
-#	Pìnta o disparo na tela							#
+#	Pï¿½nta o disparo na tela							#
 #################################################################################
 pinta_disparo:
 	lw	$t1, jogador_cor
@@ -165,7 +166,7 @@ limpa_disparo:
 	
 #################################################################################
 #	Verifica se o disparo acabou						#
-#	Retorna: $a0 = 1 se ainda está disparando				#
+#	Retorna: $a0 = 1 se ainda estï¿½ disparando				#
 #		 $a0 = 0 caso o disparo tenha terminado				#
 #################################################################################
 verifica_disparo:
@@ -501,7 +502,7 @@ obter_tecla_voltar:
 exit:
 
 #################################################################################
-#	Naves do estágio 3							#
+#	Naves do estï¿½gio 3							#
 #################################################################################
 nave_nivel_3:	
 	# Nave 1 (nave mae)
@@ -665,7 +666,7 @@ nave_nivel_3:
 	sw	$t2, nave_7 + 24
 	li	$t2, 0x100105EC
 	sw	$t2, nave_7 + 28
-	
+				
 	jr	$ra
 
 #################################################################################
@@ -695,7 +696,7 @@ naves_loop:
 	jr	$ra
 	
 #################################################################################
-#	Função para dormir por 60ms						#
+#	Funï¿½ï¿½o para dormir por 60ms						#
 #################################################################################
 sleep:
 	li $v0 32 		# Syscall 32. Usa el Sleep de Java
