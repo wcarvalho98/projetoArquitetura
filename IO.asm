@@ -33,7 +33,9 @@ nave_7:		.space 32
 main:
 	jal 	background
 	jal	player
-	jal	nave
+	jal	nave_nivel_3
+	jal	pinta_nave_1
+	jal	pinta_naves
 	
 main_loop:
 	jal	sleep
@@ -218,11 +220,10 @@ obter_tecla_voltar:
 #################################################################################
 exit:
 
-nave:
-	#naves referentes ao ï¿½ltimo nï¿½vel
-	lw	$t0, bitmap_address
-	lw	$t1, corVerde
-	
+#################################################################################
+#	Naves do estágio 3							#
+#################################################################################
+nave_nivel_3:	
 	# Nave 1 (nave mae)
 	li	$t2, 0x1001017C
 	sw	$t2, nave_1
@@ -281,90 +282,141 @@ nave:
 	li	$t2, 0x10010F18
 	sw	$t2, nave_2
 	li	$t2, 0x10011014
-	sw	$t2, nave_2
+	sw	$t2, nave_2 + 4
 	li	$t2, 0x10011018
-	sw	$t2, nave_2
+	sw	$t2, nave_2 + 8
 	li	$t2, 0x1001101C
-	sw	$t2, nave_2
+	sw	$t2, nave_2 + 12
 	li	$t2, 0x10011114
-	sw	$t2, nave_2
+	sw	$t2, nave_2 + 16
 	li	$t2, 0x1001111C
-	sw	$t2, nave_2
+	sw	$t2, nave_2 + 20
 	li	$t2, 0x10011210
-	sw	$t2, nave_2
+	sw	$t2, nave_2 + 24
 	li	$t2, 0x10011220
-	sw	$t2, nave_2
+	sw	$t2, nave_2 + 28
 	
 	# Nave 3
-	sw $t1, 2352 ($t0)
-	sw $t1, 2100 ($t0)
-	sw $t1, 1844 ($t0)
-	sw $t1, 1592 ($t0)
-	sw $t1, 1848 ($t0)
-	sw $t1, 1852 ($t0)
-	sw $t1, 2108 ($t0)
-	sw $t1, 2368 ($t0)
+	li	$t2, 0x10010638
+	sw	$t2, nave_3
+	li	$t2, 0x10010734
+	sw	$t2, nave_3 + 4
+	li	$t2, 0x10010738
+	sw	$t2, nave_3 + 8
+	li	$t2, 0x1001073C
+	sw	$t2, nave_3 + 12
+	li	$t2, 0x10010834
+	sw	$t2, nave_3 + 16
+	li	$t2, 0x1001083C
+	sw	$t2, nave_3 + 20
+	li	$t2, 0x10010930
+	sw	$t2, nave_3 + 24
+	li	$t2, 0x10010940
+	sw	$t2, nave_3 + 28
 	
 	# Nave 4
-	sw $t1, 3664 ($t0)
-	sw $t1, 3156 ($t0)
-	sw $t1, 3412 ($t0)
-	sw $t1, 2904 ($t0)
-	sw $t1, 3160 ($t0)
-	sw $t1, 3164 ($t0)
-	sw $t1, 3420 ($t0)
-	sw $t1, 3680 ($t0)
+	li	$t2, 0x10010B58
+	sw	$t2, nave_4
+	li	$t2, 0x10010C54
+	sw	$t2, nave_4 + 4
+	li	$t2, 0x10010C58
+	sw	$t2, nave_4 + 8
+	li	$t2, 0x10010C5C
+	sw	$t2, nave_4 + 12
+	li	$t2, 0x10010D54
+	sw	$t2, nave_4 + 16
+	li	$t2, 0x10010D5C
+	sw	$t2, nave_4 + 20
+	li	$t2, 0x10010E50
+	sw	$t2, nave_4 + 24
+	li	$t2, 0x10010E60
+	sw	$t2, nave_4 + 28
 	
 	# Nave 5
-	sw $t1, 2160 ($t0)
-	sw $t1, 2416 ($t0)
-	sw $t1, 1908 ($t0)
-	sw $t1, 1652 ($t0)
-	sw $t1, 1400 ($t0)
-	sw $t1, 1144 ($t0)
-	sw $t1,  888 ($t0)
-	sw $t1,  632 ($t0)
-	sw $t1,  380 ($t0)
-	sw $t1,  636 ($t0)
-	sw $t1,  892 ($t0)
-	sw $t1, 1148 ($t0)
-	sw $t1, 1404 ($t0)
-	sw $t1,  384 ($t0)
-	sw $t1,  640 ($t0)
-	sw $t1,  896 ($t0)
-	sw $t1, 1152 ($t0)
-	sw $t1, 1408 ($t0)
-	sw $t1,  644 ($t0)
-	sw $t1,  900 ($t0)
-	sw $t1, 1156 ($t0)
-	sw $t1, 1412 ($t0)
-	sw $t1, 1672 ($t0)
-	sw $t1, 1928 ($t0)
-	sw $t1, 2188 ($t0)
-	sw $t1, 2444 ($t0)
+	li	$t2, 0x100104A4
+	sw	$t2, nave_5
+	li	$t2, 0x100105A0
+	sw	$t2, nave_5 + 4
+	li	$t2, 0x100105A4
+	sw	$t2, nave_5 + 8
+	li	$t2, 0x100105A8
+	sw	$t2, nave_5 + 12
+	li	$t2, 0x100106A0
+	sw	$t2, nave_5 + 16
+	li	$t2, 0x100106A8
+	sw	$t2, nave_5 + 20
+	li	$t2, 0x1001079C
+	sw	$t2, nave_5 + 24
+	li	$t2, 0x100107AC
+	sw	$t2, nave_5 + 28
 	
 	# Nave 6
-	sw $t1, 1948 ($t0)
-	sw $t1, 1696 ($t0)
-	sw $t1, 1440 ($t0)
-	sw $t1, 1444 ($t0)
-	sw $t1, 1188 ($t0)
-	sw $t1, 1448 ($t0)
-	sw $t1, 1704 ($t0)
-	sw $t1, 1964 ($t0)
+	li	$t2, 0x10010AC4
+	sw	$t2, nave_6
+	li	$t2, 0x10010BC0
+	sw	$t2, nave_6 + 4
+	li	$t2, 0x10010BC4
+	sw	$t2, nave_6 + 8
+	li	$t2, 0x10010BC8
+	sw	$t2, nave_6 + 12
+	li	$t2, 0x10010CC0
+	sw	$t2, nave_6 + 16
+	li	$t2, 0x10010CC8
+	sw	$t2, nave_6 + 20
+	li	$t2, 0x10010DBC
+	sw	$t2, nave_6 + 24
+	li	$t2, 0x10010DCC
+	sw	$t2, nave_6 + 28
 	
 	# Nave 7
-	sw $t1, 3516 ($t0)
-	sw $t1, 3264 ($t0)
-	sw $t1, 3008 ($t0)
-	sw $t1, 3012 ($t0)
-	sw $t1, 2756 ($t0)
-	sw $t1, 3016 ($t0)
-	sw $t1, 3272 ($t0)
-	sw $t1, 3532 ($t0)
+	li	$t2, 0x100102E4
+	sw	$t2, nave_7
+	li	$t2, 0x100103E0
+	sw	$t2, nave_7 + 4
+	li	$t2, 0x100103E4
+	sw	$t2, nave_7 + 8
+	li	$t2, 0x100103E8
+	sw	$t2, nave_7 + 12
+	li	$t2, 0x100104E0
+	sw	$t2, nave_7 + 16
+	li	$t2, 0x100104E8
+	sw	$t2, nave_7 + 20
+	li	$t2, 0x100105DC
+	sw	$t2, nave_7 + 24
+	li	$t2, 0x100105EC
+	sw	$t2, nave_7 + 28
 	
 	jr	$ra
+
+#################################################################################
+#	Pinta nave 1								#
+#################################################################################
+pinta_nave_1:
+	lw	$t1, corVerde
+	move	$t2, $zero
+nave_1_loop:
+	lw	$t3, nave_1($t2)
+	sw	$t1, ($t3)
+	addi	$t2, $t2, 4
+	blt	$t2, 104, nave_1_loop
+	jr	$ra
 	
+#################################################################################
+#	Pinta naves 2-7								#
+#################################################################################
+pinta_naves:
+	lw	$t1, corVerde
+	move	$t2, $zero
+naves_loop:
+	lw	$t3, nave_2($t2)
+	sw	$t1, ($t3)
+	addi	$t2, $t2, 4
+	blt	$t2, 192, naves_loop
+	jr	$ra
+	
+#################################################################################
+#	Função para dormir por 60ms						#
+#################################################################################
 sleep:
 	li $v0 32 		# Syscall 32. Usa el Sleep de Java
 	li $a0 60
