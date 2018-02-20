@@ -15,8 +15,7 @@ bitmap_size:	.word 2048		# (512 x 256)/8 pixels
 jogador_cor:	.word 0x00FF0000
 jogador:	.space 16		# 4x4 blocos
 corVerde: 	.word 0x0000FF00
-tam: 		.word 4440
-tam_fim: 	.word 4520
+disparo:	.word 0x00000000
 
 #################################################################################
 #	MAIN	--	Space Invaders						#
@@ -120,7 +119,7 @@ mover_disparo:
 	jr	$ra
 	
 #################################################################################
-#	Pï¿½nta o disparo na tela							#
+#	Pìnta o disparo na tela							#
 #################################################################################
 pinta_disparo:
 	lw	$t1, jogador_cor
@@ -139,7 +138,7 @@ limpa_disparo:
 	
 #################################################################################
 #	Verifica se o disparo acabou						#
-#	Retorna: $a0 = 1 se ainda estï¿½ disparando				#
+#	Retorna: $a0 = 1 se ainda está disparando				#
 #		 $a0 = 0 caso o disparo tenha terminado				#
 #################################################################################
 verifica_disparo:
@@ -212,10 +211,30 @@ obter_tecla_voltar:
 #################################################################################
 exit:
 
-nave: #nivel 1
+nave:
+	#naves referentes ao ï¿½ltimo nï¿½vel
 	lw	$t0, bitmap_address
 	lw	$t1, corVerde
-
+	#Nave 1
+	sw $t1, 4624 ($t0)
+	sw $t1, 4116 ($t0)
+	sw $t1, 4372 ($t0)
+	sw $t1, 3864 ($t0)
+	sw $t1, 4120 ($t0)
+	sw $t1, 4124 ($t0)
+	sw $t1, 4380 ($t0)
+	sw $t1, 4640 ($t0)
+	
+	#Nave 2
+	sw $t1, 2352 ($t0)
+	sw $t1, 2100 ($t0)
+	sw $t1, 1844 ($t0)
+	sw $t1, 1592 ($t0)
+	sw $t1, 1848 ($t0)
+	sw $t1, 1852 ($t0)
+	sw $t1, 2108 ($t0)
+	sw $t1, 2368 ($t0)
+	
 	#nave 3
 	sw $t1, 3664 ($t0)
 	sw $t1, 3156 ($t0)
@@ -264,22 +283,28 @@ nave: #nivel 1
 	sw $t1, 1704 ($t0)
 	sw $t1, 1964 ($t0)
 	
-	#barra
-	lw	$t5, 4440 ($t0)
-	move	$t3, $zero
-	move 	$t4, $zero
-barra:
+	#nave 6
+	sw $t1, 3516 ($t0)
+	sw $t1, 3264 ($t0)
+	sw $t1, 3008 ($t0)
+	sw $t1, 3012 ($t0)
+	sw $t1, 2756 ($t0)
+	sw $t1, 3016 ($t0)
+	sw $t1, 3272 ($t0)
+	sw $t1, 3532 ($t0)
 	
-	beq	$t3, $t2, barra_exit
-	sll	$t4, $t3, 2
-	add	$t4, $t4, $t5
-	sw	$t1, 0($t4)
-	addi	$t3, $t3, 1
-	j	barra
-
+	#nave 7
+	sw $t1, 1500 ($t0)
+	sw $t1,  992 ($t0)
+	sw $t1, 1248 ($t0)
+	sw $t1,  740 ($t0)
+	sw $t1,  996 ($t0)
+	sw $t1, 1000 ($t0)
+	sw $t1, 1256 ($t0)
+	sw $t1, 1516 ($t0)
 	
-barra_exit:
-	jr $ra
+	jr	$ra
+	
 sleep:
 	li $v0 32 		# Syscall 32. Usa el Sleep de Java
 	li $a0 60
