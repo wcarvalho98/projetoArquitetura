@@ -16,6 +16,13 @@ jogador_cor:	.word 0x00FF0000
 jogador:	.space 16		# 4x4 blocos
 corVerde: 	.word 0x0000FF00
 disparo:	.word 0x00000000
+nave_1:		.space 104
+nave_2:		.space 32
+nave_3:		.space 32
+nave_4:		.space 32
+nave_5:		.space 32
+nave_6:		.space 32
+nave_7:		.space 32
 
 #################################################################################
 #	MAIN	--	Space Invaders						#
@@ -215,17 +222,80 @@ nave:
 	#naves referentes ao �ltimo n�vel
 	lw	$t0, bitmap_address
 	lw	$t1, corVerde
-	#Nave 1
-	sw $t1, 4624 ($t0)
-	sw $t1, 4116 ($t0)
-	sw $t1, 4372 ($t0)
-	sw $t1, 3864 ($t0)
-	sw $t1, 4120 ($t0)
-	sw $t1, 4124 ($t0)
-	sw $t1, 4380 ($t0)
-	sw $t1, 4640 ($t0)
 	
-	#Nave 2
+	# Nave 1 (nave mae)
+	li	$t2, 0x1001017C
+	sw	$t2, nave_1
+	li	$t2, 0x10010180
+	sw	$t2, nave_1 + 4
+	li	$t2, 0x10010278
+	sw	$t2, nave_1 + 8
+	li	$t2, 0x1001027C
+	sw	$t2, nave_1 + 12
+	li	$t2, 0x10010280
+	sw	$t2, nave_1 + 16
+	li	$t2, 0x10010284
+	sw	$t2, nave_1 + 20
+	li	$t2, 0x10010378
+	sw	$t2, nave_1 + 24
+	li	$t2, 0x1001037C
+	sw	$t2, nave_1 + 28
+	li	$t2, 0x10010380
+	sw	$t2, nave_1 + 32
+	li	$t2, 0x10010384
+	sw	$t2, nave_1 + 36
+	li	$t2, 0x10010478
+	sw	$t2, nave_1 + 40
+	li	$t2, 0x1001047C
+	sw	$t2, nave_1 + 44
+	li	$t2, 0x10010480
+	sw	$t2, nave_1 + 48
+	li	$t2, 0x10010484
+	sw	$t2, nave_1 + 52
+	li	$t2, 0x10010578
+	sw	$t2, nave_1 + 56
+	li	$t2, 0x1001057C
+	sw	$t2, nave_1 + 60
+	li	$t2, 0x10010580
+	sw	$t2, nave_1 + 64
+	li	$t2, 0x10010584
+	sw	$t2, nave_1 + 68
+	li	$t2, 0x10010674
+	sw	$t2, nave_1 + 72
+	li	$t2, 0x10010688
+	sw	$t2, nave_1 + 76
+	li	$t2, 0x10010774
+	sw	$t2, nave_1 + 80
+	li	$t2, 0x10010788
+	sw	$t2, nave_1 + 84
+	li	$t2, 0x10010870
+	sw	$t2, nave_1 + 88
+	li	$t2, 0x1001088C
+	sw	$t2, nave_1 + 92
+	li	$t2, 0x10010970
+	sw	$t2, nave_1 + 96
+	li	$t2, 0x1001098C
+	sw	$t2, nave_1 + 100
+	
+	# Nave 2
+	li	$t2, 0x10010F18
+	sw	$t2, nave_2
+	li	$t2, 0x10011014
+	sw	$t2, nave_2
+	li	$t2, 0x10011018
+	sw	$t2, nave_2
+	li	$t2, 0x1001101C
+	sw	$t2, nave_2
+	li	$t2, 0x10011114
+	sw	$t2, nave_2
+	li	$t2, 0x1001111C
+	sw	$t2, nave_2
+	li	$t2, 0x10011210
+	sw	$t2, nave_2
+	li	$t2, 0x10011220
+	sw	$t2, nave_2
+	
+	# Nave 3
 	sw $t1, 2352 ($t0)
 	sw $t1, 2100 ($t0)
 	sw $t1, 1844 ($t0)
@@ -235,7 +305,7 @@ nave:
 	sw $t1, 2108 ($t0)
 	sw $t1, 2368 ($t0)
 	
-	#nave 3
+	# Nave 4
 	sw $t1, 3664 ($t0)
 	sw $t1, 3156 ($t0)
 	sw $t1, 3412 ($t0)
@@ -245,7 +315,7 @@ nave:
 	sw $t1, 3420 ($t0)
 	sw $t1, 3680 ($t0)
 	
-	#nave 4 (nave m�e)
+	# Nave 5
 	sw $t1, 2160 ($t0)
 	sw $t1, 2416 ($t0)
 	sw $t1, 1908 ($t0)
@@ -273,7 +343,7 @@ nave:
 	sw $t1, 2188 ($t0)
 	sw $t1, 2444 ($t0)
 	
-	#nave 5
+	# Nave 6
 	sw $t1, 1948 ($t0)
 	sw $t1, 1696 ($t0)
 	sw $t1, 1440 ($t0)
@@ -283,7 +353,7 @@ nave:
 	sw $t1, 1704 ($t0)
 	sw $t1, 1964 ($t0)
 	
-	#nave 6
+	# Nave 7
 	sw $t1, 3516 ($t0)
 	sw $t1, 3264 ($t0)
 	sw $t1, 3008 ($t0)
@@ -292,16 +362,6 @@ nave:
 	sw $t1, 3016 ($t0)
 	sw $t1, 3272 ($t0)
 	sw $t1, 3532 ($t0)
-	
-	#nave 7
-	sw $t1, 1500 ($t0)
-	sw $t1,  992 ($t0)
-	sw $t1, 1248 ($t0)
-	sw $t1,  740 ($t0)
-	sw $t1,  996 ($t0)
-	sw $t1, 1000 ($t0)
-	sw $t1, 1256 ($t0)
-	sw $t1, 1516 ($t0)
 	
 	jr	$ra
 	
