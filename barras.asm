@@ -1,4 +1,5 @@
 #BarraNivel1
+barras_1:
 	li	$t2, 0x10011158
 	sw	$t2, barra_nivel_1
 	li	$t2, 0x1001115C
@@ -47,8 +48,10 @@ barra_loop:
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 80, barra_loop
+	jr	$ra
 	
 #BarraNivel2(1)
+barras_2:
 	li	$t2, 0x10011340
 	sw	$t2, barra_nivel2_1
 	li	$t2, 0x10011344
@@ -120,7 +123,7 @@ pinta_barraNivel2:
 barra_loopNivel2:
 	lw	$t3, barra_nivel2_1($t2)
 	sw	$t1, ($t3)
-	
 	addi	$t2, $t2, 4
 	blt	$t2, 120, barra_loopNivel2
+	jr	$ra
 	
