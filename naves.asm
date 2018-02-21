@@ -466,3 +466,60 @@ limpa_invasor_7_loop:
 fim_limpa_invasor:
 	move	$a1, $zero
 	jr	$ra
+	
+#################################################################################
+#	Verifica se todas as naves do nivel 1 foram destruidas			#
+#################################################################################
+verifica_1:
+	lb	$t1, destruida_1
+	beqz	$t1, fim_verifica_1
+	lb	$t2, destruida_2
+	beqz	$t2, fim_verifica_1
+	lb	$t3, destruida_3
+	beqz	$t3, fim_verifica_1
+	addi	$t0, $zero, 2
+	sb	$t0, nivel
+fim_verifica_1:
+	jr	$ra
+	
+#################################################################################
+#	Verifica se todas as naves do nivel 2 foram destruidas			#
+#################################################################################
+verifica_2:
+	lb	$t1, destruida_1
+	beqz	$t1, fim_verifica_2
+	lb	$t2, destruida_2
+	beqz	$t2, fim_verifica_2
+	lb	$t3, destruida_3
+	beqz	$t3, fim_verifica_2
+	lb	$t4, destruida_4
+	beqz	$t4, fim_verifica_2
+	lb	$t5, destruida_5
+	beqz	$t5, fim_verifica_2
+	addi	$t0, $zero, 3
+	sb	$t0, nivel
+fim_verifica_2:
+	jr	$ra
+	
+#################################################################################
+#	Verifica se todas as naves do nivel 2 foram destruidas			#
+#################################################################################
+verifica_3:
+	lb	$t1, destruida_1
+	beqz	$t1, fim_verifica_3
+	lb	$t2, destruida_2
+	beqz	$t2, fim_verifica_3
+	lb	$t3, destruida_3
+	beqz	$t3, fim_verifica_3
+	lb	$t4, destruida_4
+	beqz	$t4, fim_verifica_3
+	lb	$t5, destruida_5
+	beqz	$t5, fim_verifica_3
+	lb	$t6, destruida_6
+	beqz	$t6, fim_verifica_3
+	lb	$t7, destruida_7
+	beqz	$t7, fim_verifica_3
+	addi	$t0, $zero, 4
+	sb	$t0, nivel
+fim_verifica_3:
+	jr	$ra

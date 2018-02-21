@@ -44,7 +44,7 @@ destruida_4:	.byte  0
 destruida_5:	.byte  0
 destruida_6:	.byte  0
 destruida_7:	.byte  0
-nivel:		.byte  1
+nivel:		.byte  0
 
 #################################################################################
 #	MAIN	--	Space Invaders						#
@@ -52,14 +52,22 @@ nivel:		.byte  1
 .text
 .globl main
 main:
+	lb	$s0, nivel
+	beq	$s0, 0, main_1
+	beq	$s0, 1, main_loop_1
+	beq	$s0, 2, main_loop_2
+	beq	$s0, 3, main_loop_3
+
+main_1:
 	jal 	background
 	jal	player
 	jal	naves
 	jal	pinta_naves_1
 	jal	barras_1
-	lb	$s0, nivel
+	addi	$t0, $zero, 1
+	sb	$t0, nivel
 	
-main_loop:
+main_loop_1:
 	sleep(60)
 	li	$v0, 0x00000000
 	jal	obter_tecla
@@ -71,12 +79,60 @@ main_loop:
 	jal	verifica_acerto_nave_1
 	jal	verifica_acerto_nave_2
 	jal	verifica_acerto_nave_3
-	beq	$s0, 1, main_acerto
+	jal	verifica_1
+	lb	$s0, nivel
+	beq	$s0, 2, main_2
+	j	main_acerto
+
+main_2:
+	jal	naves
+	jal	pinta_naves_2
+	jal	barras_2
+
+main_loop_2:
+	sleep(45)
+	lb	$s0, nivel
+	li	$v0, 0x00000000
+	jal	obter_tecla
+	jal	verifica_disparo
+	bne	$a0, 1, main_direita
+	jal	limpa_disparo
+	jal	mover_disparo
+	jal	pinta_disparo
+	jal	verifica_acerto_nave_1
+	jal	verifica_acerto_nave_2
+	jal	verifica_acerto_nave_3
 	jal	verifica_acerto_nave_4
 	jal	verifica_acerto_nave_5
-	beq	$s0, 2, main_acerto
+	jal	verifica_2
+	lb	$s0, nivel
+	beq	$s0, 3, main_3
+	j	main_acerto
+	
+main_3:
+	jal	naves
+	jal	pinta_naves_3
+	
+main_loop_3:
+	sleep(30)
+	lb	$s0, nivel
+	li	$v0, 0x00000000
+	jal	obter_tecla
+	jal	verifica_disparo
+	bne	$a0, 1, main_direita
+	jal	limpa_disparo
+	jal	mover_disparo
+	jal	pinta_disparo
+	jal	verifica_acerto_nave_1
+	jal	verifica_acerto_nave_2
+	jal	verifica_acerto_nave_3
+	jal	verifica_acerto_nave_4
+	jal	verifica_acerto_nave_5
 	jal	verifica_acerto_nave_6
 	jal	verifica_acerto_nave_7
+	jal	verifica_3
+	lb	$s0, nivel
+	beq	$s0, 4, exit
 	
 main_acerto:
 	beqz	$a3, main_direita
@@ -86,19 +142,19 @@ main_acerto:
 main_direita:
 	bne	$v0, 0x01000000, main_esquerda
 	jal	mover_direita
-	j	main_loop
+	j	main
 	
 main_esquerda:
 	bne	$v0, 0x02000000, main_disparo
 	jal	mover_esquerda
-	j	main_loop
+	j	main
 	
 main_disparo:
-	bne	$v0, 0x03000000, main_loop
+	bne	$v0, 0x03000000, main
 	jal	verifica_disparo
-	beq 	$a0, 1, main_loop
+	beq 	$a0, 1, main
 	jal	disparar
-	j	main_loop
+	j	main
 
 #################################################################################
 #	Retorna $v0 com o valor 0x01, 0x02 ou 0x03, indicando			#
