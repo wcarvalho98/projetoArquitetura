@@ -1,4 +1,22 @@
-#BarraNivel1
+#################################################################################
+#	Pintando o background							#
+#################################################################################
+background:
+	lw	$t0, bitmap_address
+	lw	$t1, cor
+	lw	$t2, bitmap_size
+	move	$t3, $zero
+backgroud_loop:
+	sll	$t4, $t3, 2
+	add	$t4, $t4, $t0
+	sw	$t1, 0($t4)
+	addi	$t3, $t3, 1
+	blt	$t3, $t2, backgroud_loop
+	jr	$ra
+
+#################################################################################
+#	Pintando barras do nivel 1						#
+#################################################################################
 barras_1:
 	li	$t2, 0x10011158
 	sw	$t2, barra_nivel_1
@@ -50,8 +68,11 @@ barra_loop:
 	blt	$t2, 80, barra_loop
 	jr	$ra
 	
-#BarraNivel2(1)
+#################################################################################
+#	Pintando barras do nivel 2						#
+#################################################################################
 barras_2:
+	# Primeira barra
 	li	$t2, 0x10011340
 	sw	$t2, barra_nivel2_1
 	li	$t2, 0x10011344
@@ -84,7 +105,7 @@ barras_2:
 	sw	$t2, barra_nivel2_1 + 56
 	li	$t2, 0x1001137C
 	
-	#BarraNivel2(2)
+	# Segunda barra
 	li	$t2, 0x10011388
 	sw	$t2, barra_nivel2_2
 	li	$t2, 0x1001138C
