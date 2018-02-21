@@ -149,6 +149,63 @@ barra_loopNivel2:
 	jr	$ra
 	
 #################################################################################
+#	Verifica se houve um acerto na barra nivel 1				#
+#################################################################################
+verifica_acerto_barra_1:
+	move	$t7, $ra
+	addi	$t0, $zero, 0x10011158
+	lw	$t1, disparo
+	sub	$t0, $t1, $t0
+	blt	$t0, $zero, fim_verifica_acerto_barra_1
+	bgt	$t0, 76, fim_verifica_acerto_barra_1
+	lw	$t1, barra_nivel_1($t0)
+	beq	$t1, $zero, fim_verifica_acerto_barra_1
+	sw	$zero, barra_nivel_1($t0)
+	jal	limpa_disparo
+	sw	$zero, disparo
+	
+fim_verifica_acerto_barra_1:
+	jr	$t7
+		
+#################################################################################
+#	Verifica se houve um acerto na barra nivel 2 numero 1			#
+#################################################################################
+verifica_acerto_barra_2_1:
+	move	$t7, $ra
+	addi	$t0, $zero, 0x10011340
+	lw	$t1, disparo
+	sub	$t0, $t1, $t0
+	blt	$t0, $zero, fim_verifica_acerto_barra_2_1
+	bgt	$t0, 56, fim_verifica_acerto_barra_2_1
+	lw	$t1, barra_nivel2_1($t0)
+	beq	$t1, $zero, fim_verifica_acerto_barra_2_1
+	sw	$zero, barra_nivel2_1($t0)
+	jal	limpa_disparo
+	sw	$zero, disparo
+	
+fim_verifica_acerto_barra_2_1:
+	jr	$t7
+			
+#################################################################################
+#	Verifica se houve um acerto na barra nivel 2 numero 1			#
+#################################################################################
+verifica_acerto_barra_2_2:
+	move	$t7, $ra
+	addi	$t0, $zero, 0x10011388
+	lw	$t1, disparo
+	sub	$t0, $t1, $t0
+	blt	$t0, $zero, fim_verifica_acerto_barra_2_2
+	bgt	$t0, 56, fim_verifica_acerto_barra_2_2
+	lw	$t1, barra_nivel2_2($t0)
+	beq	$t1, $zero, fim_verifica_acerto_barra_2_2
+	sw	$zero, barra_nivel2_2($t0)
+	jal	limpa_disparo
+	sw	$zero, disparo
+	
+fim_verifica_acerto_barra_2_2:
+	jr	$t7
+	
+#################################################################################
 #	Pintando a área reservada a indicação de nível				#
 #################################################################################
 espaco_reservado:

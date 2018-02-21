@@ -78,6 +78,9 @@ main_loop_1:
 	jal	limpa_disparo
 	jal	mover_disparo
 	jal	pinta_disparo
+	jal	verifica_acerto_barra_1
+	jal	verifica_disparo
+	bne	$a0, 1, main_direita
 	jal	verifica_acerto_nave_1
 	jal	verifica_acerto_nave_2
 	jal	verifica_acerto_nave_3
@@ -108,6 +111,10 @@ main_loop_2:
 	jal	limpa_disparo
 	jal	mover_disparo
 	jal	pinta_disparo
+	jal	verifica_acerto_barra_2_1
+	jal	verifica_acerto_barra_2_2
+	jal	verifica_disparo
+	bne	$a0, 1, main_direita
 	jal	verifica_acerto_nave_1
 	jal	verifica_acerto_nave_2
 	jal	verifica_acerto_nave_3
