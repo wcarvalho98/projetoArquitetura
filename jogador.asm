@@ -69,7 +69,7 @@ limpa_disparo:
 	
 #################################################################################
 #	Verifica se o disparo acabou						#
-#	Retorna: $a0 = 1 se ainda estï¿½ disparando				#
+#	Retorna: $a0 = 1 se ainda estïver disparando				#
 #		 $a0 = 0 caso o disparo tenha terminado				#
 #################################################################################
 verifica_disparo:

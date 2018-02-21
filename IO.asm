@@ -85,14 +85,17 @@ main_loop_1:
 	j	main_acerto
 
 main_2:
-	jal	background
 	jal	naves
-	jal	pinta_naves_2
+	jal	background
+	jal	pinta_player
 	jal	barras_2
+	jal	pinta_naves_2
+	sw	$zero, disparo
+	move	$a1, $zero
+	move	$a3, $zero
 
 main_loop_2:
 	sleep(45)
-	lb	$s0, nivel
 	li	$v0, 0x00000000
 	jal	obter_tecla
 	jal	verifica_disparo
@@ -111,13 +114,16 @@ main_loop_2:
 	j	main_acerto
 	
 main_3:
-	jal	background
 	jal	naves
+	jal	background
+	jal	pinta_player
 	jal	pinta_naves_3
+	sw	$zero, disparo
+	move	$a1, $zero
+	move	$a3, $zero
 	
 main_loop_3:
 	sleep(30)
-	lb	$s0, nivel
 	li	$v0, 0x00000000
 	jal	obter_tecla
 	jal	verifica_disparo
@@ -139,6 +145,7 @@ main_loop_3:
 main_acerto:
 	beqz	$a3, main_direita
 	jal	limpa_invasor
+	move	$a1, $zero
 	move	$a3, $zero
 	
 main_direita:

@@ -212,11 +212,9 @@ naves_3_loop:
 #################################################################################
 verifica_acerto_nave_1:
 	lb	$t4, destruida_1
+	move	$t1, $zero
 	beq	$t4, 1, fim_1
 	lw	$t0, disparo
-	move	$t1, $zero
-	move 	$a1, $zero
-	move	$a2, $zero
 	move	$t2, $zero
 acerto_1_loop:
 	lw	$t3, nave_1($t2)
@@ -241,11 +239,10 @@ acerto_1:
 #################################################################################
 verifica_acerto_nave_2:
 	lb	$t4, destruida_2
+	move	$t1, $zero
 	beq	$t4, 1, fim_2
 	beq	$a3, 1, fim_2
 	lw	$t0, disparo
-	move	$t1, $zero
-	move 	$a1, $zero
 	move	$t2, $zero
 acerto_2_loop:
 	lw	$t3, nave_2($t2)
@@ -270,11 +267,10 @@ acerto_2:
 #################################################################################
 verifica_acerto_nave_3:
 	lb	$t4, destruida_3
+	move	$t1, $zero
 	beq	$t4, 1, fim_3
 	beq	$a3, 1, fim_3
 	lw	$t0, disparo
-	move	$t1, $zero
-	move 	$a1, $zero
 	move	$t2, $zero
 acerto_3_loop:
 	lw	$t3, nave_3($t2)
@@ -299,11 +295,10 @@ acerto_3:
 #################################################################################
 verifica_acerto_nave_4:
 	lb	$t4, destruida_4
+	move	$t1, $zero
 	beq	$t4, 1, fim_4
 	beq	$a3, 1, fim_4
 	lw	$t0, disparo
-	move	$t1, $zero
-	move 	$a1, $zero
 	move	$t2, $zero
 acerto_4_loop:
 	lw	$t3, nave_4($t2)
@@ -328,11 +323,10 @@ acerto_4:
 #################################################################################
 verifica_acerto_nave_5:
 	lb	$t4, destruida_5
+	move	$t1, $zero
 	beq	$t4, 1, fim_5
 	beq	$a3, 1, fim_5
 	lw	$t0, disparo
-	move	$t1, $zero
-	move 	$a1, $zero
 	move	$t2, $zero
 acerto_5_loop:
 	lw	$t3, nave_5($t2)
@@ -357,11 +351,10 @@ acerto_5:
 #################################################################################
 verifica_acerto_nave_6:
 	lb	$t4, destruida_6
+	move	$t1, $zero
 	beq	$t4, 1, fim_6
 	beq	$a3, 1, fim_6
 	lw	$t0, disparo
-	move	$t1, $zero
-	move 	$a1, $zero
 	move	$t2, $zero
 acerto_6_loop:
 	lw	$t3, nave_6($t2)
@@ -386,11 +379,10 @@ acerto_6:
 #################################################################################
 verifica_acerto_nave_7:
 	lb	$t4, destruida_7
+	move	$t1, $zero
 	beq	$t4, 1, fim_7
 	beq	$a3, 1, fim_7
 	lw	$t0, disparo
-	move	$t1, $zero
-	move 	$a1, $zero
 	move	$t2, $zero
 acerto_7_loop:
 	lw	$t3, nave_7($t2)
@@ -415,6 +407,7 @@ limpa_invasor:
 	move	$t2, $zero
 	move	$t3, $zero
 	move	$t7, $ra
+	beqz	$a1, fim_limpa_invasor
 	lw	$t1, cor
 	beq	$a1, 1, limpa_invasor_1_loop
 	beq	$a1, 2, limpa_invasor_2_loop
