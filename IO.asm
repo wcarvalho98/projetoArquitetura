@@ -13,8 +13,8 @@
 #################################################################################
 .include	"barras.asm"
 .include	"naves.asm"
-.include	"jogador.asm"
 .include	"macros.asm"
+.include	"jogador.asm"
 
 #################################################################################
 #	Dados									#
@@ -85,6 +85,7 @@ main_loop_1:
 	j	main_acerto
 
 main_2:
+	jal	background
 	jal	naves
 	jal	pinta_naves_2
 	jal	barras_2
@@ -110,6 +111,7 @@ main_loop_2:
 	j	main_acerto
 	
 main_3:
+	jal	background
 	jal	naves
 	jal	pinta_naves_3
 	

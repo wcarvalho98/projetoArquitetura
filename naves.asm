@@ -277,7 +277,7 @@ verifica_acerto_nave_3:
 	move 	$a1, $zero
 	move	$t2, $zero
 acerto_3_loop:
-	lw	$t3, nave_2($t2)
+	lw	$t3, nave_3($t2)
 	seq	$t1, $t0, $t3
 	beq	$t1, 1, fim_3
 	addi	$t2, $t2, 4
@@ -414,6 +414,7 @@ acerto_7:
 limpa_invasor:
 	move	$t2, $zero
 	move	$t3, $zero
+	move	$t7, $ra
 	lw	$t1, cor
 	beq	$a1, 1, limpa_invasor_1_loop
 	beq	$a1, 2, limpa_invasor_2_loop
@@ -427,45 +428,59 @@ limpa_invasor_1_loop:
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 104, limpa_invasor_1_loop
+	jal	limpa_disparo
+	sw	$zero, disparo
 	j	fim_limpa_invasor
 limpa_invasor_2_loop:
 	lw	$t3, nave_2($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 32, limpa_invasor_2_loop
+	jal	limpa_disparo
+	sw	$zero, disparo
 	j	fim_limpa_invasor
 limpa_invasor_3_loop:
 	lw	$t3, nave_3($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 32, limpa_invasor_3_loop
+	jal	limpa_disparo
+	sw	$zero, disparo
 	j	fim_limpa_invasor
 limpa_invasor_4_loop:
 	lw	$t3, nave_4($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 32, limpa_invasor_4_loop
+	jal	limpa_disparo
+	sw	$zero, disparo
 	j	fim_limpa_invasor
 limpa_invasor_5_loop:
 	lw	$t3, nave_5($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 32, limpa_invasor_5_loop
+	jal	limpa_disparo
+	sw	$zero, disparo
 	j	fim_limpa_invasor
 limpa_invasor_6_loop:
 	lw	$t3, nave_6($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 32, limpa_invasor_6_loop
+	jal	limpa_disparo
+	sw	$zero, disparo
 	j	fim_limpa_invasor
 limpa_invasor_7_loop:
 	lw	$t3, nave_7($t2)
 	sw	$t1, ($t3)
 	addi	$t2, $t2, 4
 	blt	$t2, 32, limpa_invasor_7_loop
+	jal	limpa_disparo
+	sw	$zero, disparo
 fim_limpa_invasor:
 	move	$a1, $zero
-	jr	$ra
+	jr	$t7
 	
 #################################################################################
 #	Verifica se todas as naves do nivel 1 foram destruidas			#
@@ -477,6 +492,9 @@ verifica_1:
 	beqz	$t2, fim_verifica_1
 	lb	$t3, destruida_3
 	beqz	$t3, fim_verifica_1
+	sb	$zero, destruida_1
+	sb	$zero, destruida_2
+	sb	$zero, destruida_3
 	addi	$t0, $zero, 2
 	sb	$t0, nivel
 fim_verifica_1:
@@ -496,6 +514,11 @@ verifica_2:
 	beqz	$t4, fim_verifica_2
 	lb	$t5, destruida_5
 	beqz	$t5, fim_verifica_2
+	sb	$zero, destruida_1
+	sb	$zero, destruida_2
+	sb	$zero, destruida_3
+	sb	$zero, destruida_4
+	sb	$zero, destruida_5
 	addi	$t0, $zero, 3
 	sb	$t0, nivel
 fim_verifica_2:
@@ -519,6 +542,13 @@ verifica_3:
 	beqz	$t6, fim_verifica_3
 	lb	$t7, destruida_7
 	beqz	$t7, fim_verifica_3
+	sb	$zero, destruida_1
+	sb	$zero, destruida_2
+	sb	$zero, destruida_3
+	sb	$zero, destruida_4
+	sb	$zero, destruida_5
+	sb	$zero, destruida_6
+	sb	$zero, destruida_7
 	addi	$t0, $zero, 4
 	sb	$t0, nivel
 fim_verifica_3:
