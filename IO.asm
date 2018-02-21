@@ -64,6 +64,8 @@ main_1:
 	jal	naves
 	jal	pinta_naves_1
 	jal	barras_1
+	jal	espaco_reservado
+	jal	pinta_nivel_1
 	addi	$t0, $zero, 1
 	sb	$t0, nivel
 	
@@ -90,6 +92,9 @@ main_2:
 	jal	pinta_player
 	jal	barras_2
 	jal	pinta_naves_2
+	jal	espaco_reservado
+	jal	pinta_nivel_1
+	jal	pinta_nivel_2
 	sw	$zero, disparo
 	move	$a1, $zero
 	move	$a3, $zero
@@ -117,7 +122,11 @@ main_3:
 	jal	naves
 	jal	background
 	jal	pinta_player
+	jal	espaco_reservado
+	jal	pinta_nivel_1
+	jal	pinta_nivel_2
 	jal	pinta_naves_3
+	jal	pinta_nivel_3
 	sw	$zero, disparo
 	move	$a1, $zero
 	move	$a3, $zero
@@ -140,7 +149,7 @@ main_loop_3:
 	jal	verifica_acerto_nave_7
 	jal	verifica_3
 	lb	$s0, nivel
-	beq	$s0, 4, exit
+	beq	$s0, 4, main_4
 	
 main_acerto:
 	beqz	$a3, main_direita
@@ -164,6 +173,11 @@ main_disparo:
 	beq 	$a0, 1, main
 	jal	disparar
 	j	main
+	
+main_4:
+	jal	preto
+	jal	game_over
+	j	exit
 
 #################################################################################
 #	Retorna $v0 com o valor 0x01, 0x02 ou 0x03, indicando			#
