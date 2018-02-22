@@ -204,6 +204,76 @@ verifica_acerto_barra_2_2:
 	
 fim_verifica_acerto_barra_2_2:
 	jr	$t7
+
+#################################################################################
+#	Verifica se houve um acerto na barra nivel 1				#
+#	Retorna: $s4 = x, tal que x é o numero da nave que acertou a barra	#
+#################################################################################
+verifica_acerto_inimigo_barra_1:
+	move	$t2, $zero
+	move	$s4, $zero
+	move	$t4, $zero
+	addi	$t0, $zero, 0x10011158
+loop_barra_1:
+	lw	$t1, disparo1_1($t2)
+	addi	$t2, $t2, 4
+	sub	$t3, $t1, $t0
+	beq	$t2, 20, fim_verifica_acerto_inimigo_barra_1
+	blt	$t3, $zero, loop_barra_1
+	bgt	$t3, 76, loop_barra_1
+	lw	$t1, barra_nivel_1($t3)
+	beq	$t1, $zero, fim_verifica_acerto_inimigo_barra_1
+	div	$s4, $t2, 4
+	sw	$zero, barra_nivel_1($t3)
+	
+fim_verifica_acerto_inimigo_barra_1:
+	jr	$ra
+	
+#################################################################################
+#	Verifica se houve um acerto na barra 1 nivel 2				#
+#	Retorna: $s4 = x, tal que x é o numero da nave que acertou a barra	#
+#################################################################################
+verifica_acerto_inimigo_barra_2_1:
+	move	$t2, $zero
+	move	$s4, $zero
+	addi	$t0, $zero, 0x10011340
+loop_barra_2_1:
+	lw	$t1, disparo1_1($t2)
+	addi	$t2, $t2, 4
+	sub	$t3, $t1, $t0
+	beq	$t2, 36, fim_verifica_acerto_inimigo_barra_2_1
+	blt	$t3, $zero, loop_barra_2_1
+	bgt	$t3, 56, loop_barra_2_1
+	lw	$t1, barra_nivel2_1($t3)
+	beq	$t1, $zero, fim_verifica_acerto_inimigo_barra_2_1
+	div	$s4, $t2, 4
+	sw	$zero, barra_nivel2_1($t3)
+	
+fim_verifica_acerto_inimigo_barra_2_1:
+	jr	$ra
+	
+#################################################################################
+#	Verifica se houve um acerto na barra 2 nivel 2				#
+#	Retorna: $s4 = x, tal que x é o numero da nave que acertou a barra	#
+#################################################################################
+verifica_acerto_inimigo_barra_2_2:
+	move	$t2, $zero
+	move	$s4, $zero
+	addi	$t0, $zero, 0x10011388
+loop_barra_2_2:
+	lw	$t1, disparo1_1($t2)
+	addi	$t2, $t2, 4
+	sub	$t3, $t1, $t0
+	beq	$t2, 36, fim_verifica_acerto_inimigo_barra_2_2
+	blt	$t3, $zero, loop_barra_2_2
+	bgt	$t3, 56, loop_barra_2_2
+	lw	$t1, barra_nivel2_2($t3)
+	beq	$t1, $zero, fim_verifica_acerto_inimigo_barra_2_2
+	div	$s4, $t2, 4
+	sw	$zero, barra_nivel2_2($t3)
+	
+fim_verifica_acerto_inimigo_barra_2_2:
+	jr	$ra
 	
 #################################################################################
 #	Pintando a área reservada a indicação de nível				#

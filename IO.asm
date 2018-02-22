@@ -16,6 +16,7 @@
 .include	"macros.asm"
 .include	"jogador.asm"
 .include	"disparos.asm"
+.include	"mainDisparos.asm"
 
 #################################################################################
 #	Dados									#
@@ -81,6 +82,15 @@ main_1:
 	
 main_loop_1:
 	sleep(60)
+	jal	main_disparo1_1
+	jal	main_disparo1_2
+	jal	main_disparo_2
+	jal	main_disparo_3
+	jal	verifica_morte
+	beq	$s7, 1, main_4
+	jal	verifica_barra_inimigo_1
+	jal	verifica_barra_inimigo_1
+	jal	verifica_barra_inimigo_1
 	li	$v0, 0x00000000
 	jal	obter_tecla
 	jal	verifica_disparo
@@ -100,6 +110,16 @@ main_loop_1:
 	j	main_acerto
 
 main_2:
+	sw	$zero, disparo1_1
+	sw	$zero, disparo1_2
+	sw	$zero, disparo_2
+	sw	$zero, disparo_3
+	addi	$t0, $zero, 0x00800080
+	sw	$t0, corVerde
+	addi	$t1, $zero, 0x0000008B
+	sw	$t1, cor
+	addi	$t0, $zero, 0x00FFFFFF
+	sw	$t0, corDisparo
 	jal	naves
 	jal	background
 	jal	pinta_player
@@ -114,6 +134,16 @@ main_2:
 
 main_loop_2:
 	sleep(45)
+	jal	main_disparo1_1
+	jal	main_disparo1_2
+	jal	main_disparo_2
+	jal	main_disparo_3
+	jal	main_disparo_4
+	jal	main_disparo_5
+	jal	verifica_morte
+	beq	$s7, 1, main_4
+	jal	verifica_barra_inimigo_2_1
+	jal	verifica_barra_inimigo_2_2
 	li	$v0, 0x00000000
 	jal	obter_tecla
 	jal	verifica_disparo
@@ -136,20 +166,41 @@ main_loop_2:
 	j	main_acerto
 	
 main_3:
+	sw	$zero, disparo1_1
+	sw	$zero, disparo1_2
+	sw	$zero, disparo_2
+	sw	$zero, disparo_3
+	sw	$zero, disparo_4
+	sw	$zero, disparo_5
+	addi	$t0, $zero, 0x00FFD700
+	sw	$t0, corVerde
+	sw	$zero, cor
+	addi	$t0, $zero, 0x00FA8072
+	sw	$t0, corDisparo
 	jal	naves
 	jal	background
 	jal	pinta_player
 	jal	espaco_reservado
 	jal	pinta_nivel_1
 	jal	pinta_nivel_2
-	jal	pinta_naves_3
 	jal	pinta_nivel_3
+	jal	pinta_naves_3
 	sw	$zero, disparo
 	move	$a1, $zero
 	move	$a3, $zero
 	
 main_loop_3:
 	sleep(30)
+	jal	main_disparo1_1
+	jal	main_disparo1_2
+	jal	main_disparo_2
+	jal	main_disparo_3
+	jal	main_disparo_4
+	jal	main_disparo_5
+	jal	main_disparo_6
+	jal	main_disparo_7
+	jal	verifica_morte
+	beq	$s7, 1, main_4
 	li	$v0, 0x00000000
 	jal	obter_tecla
 	jal	verifica_disparo

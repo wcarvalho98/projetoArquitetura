@@ -114,3 +114,26 @@ esquerda_loop:
 	jal	pinta_player
 esquerda_fim:
 	jr	$t7
+	
+#################################################################################
+#	Verifica se um disparo acertou o player					#
+#	Retorna: $s7 = 1 se acertou o player					#
+#################################################################################
+verifica_morte:
+	move	$s7, $zero
+	move	$t2, $zero
+	lw	$t3, jogador
+	lw	$t4, jogador + 4
+	lw	$t5, jogador + 12
+loop_morte:
+	lw	$t1, disparo1_1($t2)
+	beq	$t1, $t3, morte
+	beq	$t1, $t4, morte
+	beq	$t1, $t5, morte
+	addi	$t2, $t2, 4
+	blt	$t2, 32, loop_morte
+fim_morte:
+	jr	$ra
+morte:
+	addi	$s7, $zero, 1
+	j	fim_morte
