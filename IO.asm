@@ -27,6 +27,7 @@ bitmap_address:	.word 0x10010000
 bitmap_size:	.word 2048		# (512 x 256)/8 pixels
 jogador_cor:	.word 0x00FF0000
 jogador:	.space 16		# 4x4 blocos
+jogador_temp:	.space 16
 corVerde: 	.word 0x0000FF00
 corDisparo:	.word 0x004B0082
 disparo:	.word 0x00000000
@@ -114,6 +115,9 @@ main_2:
 	sw	$zero, disparo1_2
 	sw	$zero, disparo_2
 	sw	$zero, disparo_3
+	jal	salva_jogador
+	jal	mover_acima
+	jal	carregar_acima
 	addi	$t0, $zero, 0x00800080
 	sw	$t0, corVerde
 	addi	$t1, $zero, 0x0000008B
@@ -122,7 +126,7 @@ main_2:
 	sw	$t0, corDisparo
 	jal	naves
 	jal	background
-	jal	pinta_player
+	jal	voltar_acima
 	jal	barras_2
 	jal	pinta_naves_2
 	jal	espaco_reservado
@@ -172,6 +176,9 @@ main_3:
 	sw	$zero, disparo_3
 	sw	$zero, disparo_4
 	sw	$zero, disparo_5
+	jal	salva_jogador
+	jal	mover_acima
+	jal	carregar_acima
 	addi	$t0, $zero, 0x00FFD700
 	sw	$t0, corVerde
 	sw	$zero, cor
@@ -179,7 +186,7 @@ main_3:
 	sw	$t0, corDisparo
 	jal	naves
 	jal	background
-	jal	pinta_player
+	jal	voltar_acima
 	jal	espaco_reservado
 	jal	pinta_nivel_1
 	jal	pinta_nivel_2

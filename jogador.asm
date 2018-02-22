@@ -137,3 +137,67 @@ fim_morte:
 morte:
 	addi	$s7, $zero, 1
 	j	fim_morte
+	
+#################################################################################
+#	Salva dentro de jogador_temp a posicao atual do player			#
+#################################################################################
+salva_jogador:
+	move	$t2, $zero
+salva_loop:
+	lw	$t3, jogador($t2)
+	sw	$t3, jogador_temp($t2)
+	addi	$t2, $t2, 4
+	blt	$t2, 16, salva_loop
+	jr	$ra
+
+#################################################################################
+#	Movendo o jogador para cima						#
+#################################################################################
+mover_acima:
+	move	$t7, $ra
+acima_loop_ext:
+	move	$t5, $zero
+	jal	limpa_jogador
+acima_loop:
+	lw	$t4, jogador($t5)
+	addi	$t4, $t4, -256
+	sw	$t4, jogador($t5)
+	addi	$t5, $t5, 4
+	blt	$t5, 16, acima_loop
+	jal	pinta_player
+	sleep(50)
+	bgt	$t4, 0x10010000, acima_loop_ext
+	jr	$t7
+	
+#################################################################################
+#	Carregando os dados do jogador para voltar a posicao original		#
+#################################################################################
+carregar_acima:
+	move	$t2, $zero
+carregar_acima_loop:
+	lw	$t3, jogador_temp($t2)
+	addi	$t3, $t3, 1280
+	sw	$t3, jogador($t2)
+	addi	$t2, $t2, 4
+	blt	$t2, 16, carregar_acima_loop
+	jr	$ra
+
+#################################################################################
+#	Voltando para a posicao original					#
+#################################################################################
+voltar_acima:
+	move	$t7, $ra
+	lw	$t4, jogador_temp + 12
+voltar_acima_loop_ext:
+	move	$t6, $zero
+	jal	limpa_jogador
+voltar_acima_loop:
+	lw	$t5, jogador($t6)
+	addi	$t5, $t5, -256
+	sw	$t5, jogador($t6)
+	addi	$t6, $t6, 4
+	blt	$t6, 16, voltar_acima_loop
+	jal	pinta_player
+	sleep(50)
+	bgt	$t5, $t4, voltar_acima_loop_ext
+	jr	$t7
