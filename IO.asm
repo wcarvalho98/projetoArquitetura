@@ -56,6 +56,7 @@ destruida_4:	.byte  0
 destruida_5:	.byte  0
 destruida_6:	.byte  0
 destruida_7:	.byte  0
+barra_destruida_1: .byte 0
 nivel:		.byte  0
 
 #################################################################################
@@ -99,9 +100,7 @@ main_loop_1:
 	jal	limpa_disparo
 	jal	mover_disparo
 	jal	pinta_disparo
-	jal	verifica_acerto_barra_1
-	jal	verifica_disparo
-	bne	$a0, 1, main_direita
+	jal 	verifica_acerto_barra1
 	jal	verifica_acerto_nave_1
 	jal	verifica_acerto_nave_2
 	jal	verifica_acerto_nave_3
