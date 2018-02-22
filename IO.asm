@@ -15,6 +15,7 @@
 .include	"naves.asm"
 .include	"macros.asm"
 .include	"jogador.asm"
+.include	"disparos.asm"
 
 #################################################################################
 #	Dados									#
@@ -26,6 +27,7 @@ bitmap_size:	.word 2048		# (512 x 256)/8 pixels
 jogador_cor:	.word 0x00FF0000
 jogador:	.space 16		# 4x4 blocos
 corVerde: 	.word 0x0000FF00
+corDisparo:	.word 0x004B0082
 disparo:	.word 0x00000000
 nave_1:		.space 104
 nave_2:		.space 32
@@ -34,6 +36,14 @@ nave_4:		.space 32
 nave_5:		.space 32
 nave_6:		.space 32
 nave_7:		.space 32
+disparo1_1:	.word 0x00000000
+disparo1_2:	.word 0x00000000
+disparo_2:	.word 0x00000000
+disparo_3:	.word 0x00000000
+disparo_4:	.word 0x00000000
+disparo_5:	.word 0x00000000
+disparo_6:	.word 0x00000000
+disparo_7:	.word 0x00000000
 barra_nivel_1: 	.space 80
 barra_nivel2_1: .space 60
 barra_nivel2_2: .space 60
@@ -182,7 +192,8 @@ main_disparo:
 	j	main
 	
 main_4:
-	jal	preto
+	sw	$zero, cor
+	jal	background
 	jal	game_over
 	j	exit
 
